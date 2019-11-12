@@ -37,7 +37,7 @@ test('cc conversion', (done) => {
       expect(jsonParams).toBeTruthy();
       expect(jsonParams.length).toEqual(2);
       expect(jsonParams[0].controlChangeNumber).toEqual(1);
-      expect(jsonParams[0].name).toEqual('Behringer Neutron');
+      expect(jsonParams[0].name).toEqual('Modulation wheel');
       done();
     });
   });
