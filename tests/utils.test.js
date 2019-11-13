@@ -1,4 +1,5 @@
 const utils = require('../lib/utils');
+const fs = require('fs');
 const _ = require('lodash');
 
 test('we get some csv files', (done) => {
@@ -24,8 +25,7 @@ test('we can load a csv file.', (done) => {
     if (err) throw err;
     expect(result).toBeTruthy();
     expect(result[0]).toBeTruthy();
-    expect(_.keys(result[0])[0]).toEqual('manufacturer');
-    expect(result[0].manufacturer).toEqual('Behringer');
+    expect(result[0][0]).toEqual('Behringer');
     done();
   });
 });
@@ -33,12 +33,42 @@ test('we can load a csv file.', (done) => {
 test('cc conversion', (done) => {
   utils.loadCSV('./tests/test-data/csv/one/Neutron.csv', (err, result) => {
     if (err) throw err;
-    utils.midiCSVToJSON(result, (err, jsonParams) => {
-      expect(jsonParams).toBeTruthy();
-      expect(jsonParams.length).toEqual(2);
-      expect(jsonParams[0].controlChangeNumber).toEqual(1);
-      expect(jsonParams[0].name).toEqual('Modulation wheel');
+    utils.midiCSVToJSON(result, (err, device) => {
+      expect(device).toBeTruthy();
+      expect(device.controlChangeCommands[0].controlChangeNumber).toEqual(1);
+      expect(device.controlChangeCommands[0].name).toEqual('Modulation wheel');
       done();
+    });
+  });
+});
+
+// synchronous test!!
+test('json outoput file name formatting', () => {
+  let mock = {
+    device: {
+      model: 'some Major Synth',
+      manufacturer: 'Dave Smith Instruments'
+    }
+  };
+  let name = utils.formatJSONSpecName(mock);
+  expect(name).toEqual('dave-smith-instruments-some-major-synth.json');
+});
+
+test('json spec file creation', (done) => {
+  utils.loadCSV('./tests/test-data/csv/one/Neutron.csv', (err, result) => {
+    if (err) throw err;
+    utils.midiCSVToJSON(result, (err, device) => {
+      utils.writeJSONDefinition(device, './tests/output', (err, result) => {
+        // done();
+        let likelyFile = './tests/output/behringer-neutron.json';
+        expect(fs.existsSync('./tests/output/behringer-neutron.json')).toBeTruthy();
+        var data = JSON.parse(fs.readFileSync(likelyFile));
+        expect(data.description).toEqual('open-midi-rtc-schema specification for Behringer Neutron');
+        expect(data.displayName).toEqual('Behringer Neutron');
+        expect(data.device.displayName).toEqual('Neutron');
+        expect(data.controlChangeCommands.length).toBeGreaterThan(1);
+        done();
+      });
     });
   });
 });

@@ -9,3 +9,9 @@ This utility scans a git checkout of the git
 [open-midi-rtc-schema](https://github.com/eokuwwy/open-midi-rtc-schema)
 * when necessary, stub JSON files meant to contain meta-data for a given synth that is
 used by the OCHO max for live device and other devices.
+
+Basic functionality:
+
+1. checkout or update git repos for open midi rtc and usercamp/midi
+2. convert relevant csv format sources from midicamp to OMR json format
+3. create stubs for any new hardware we're seeing

@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const utils = require('./lib/utils');
 const fs = require('fs');
 
@@ -10,7 +11,14 @@ if (require.main === module) {
   if (argv.csvroot && fs.existsSync(argv.csvroot)) {
     utils.getAllCSVSources(argv.csvroot, (err, result) => {
       if (err) throw err;
-      console.log(result);
+      _.map(result, (csvPath) => {
+        utils.createJSONMapfromCSV(csvPath, (err, result) => {
+          utils.writeJSONDefinition(result, './output/', (err, result) => {
+            if (err) throw err;
+            console.log(result);
+          });
+        });
+      });
     });
   }
 
@@ -21,3 +29,6 @@ if (require.main === module) {
     });
   }
 }
+
+
+module.exports = utils;
