@@ -43,7 +43,7 @@ test('cc conversion', (done) => {
 });
 
 // synchronous test!!
-test('json outoput file name formatting', () => {
+test('json output file name formatting', () => {
   let mock = {
     device: {
       model: 'some Major Synth',
