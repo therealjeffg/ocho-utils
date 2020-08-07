@@ -15,3 +15,5 @@ Basic functionality:
 1. checkout or update git repos for open midi rtc and usercamp/midi
 2. convert relevant csv format sources from midicamp to OMR json format
 3. create stubs for any new hardware we're seeing
+
+See license.txt for CCC details.
