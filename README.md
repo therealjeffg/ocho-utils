@@ -1,5 +1,7 @@
 ## OCHO Utilities
 
+[![Build status](https://ci.appveyor.com/api/projects/status/063v38jv6lwoxq5e?svg=true)](https://ci.appveyor.com/project/therealjeffg/ocho-utils)
+
 A utility module for translating csv data defining midi parameters from usercamp's data set
 into JSON files for use in OCHO.
 
