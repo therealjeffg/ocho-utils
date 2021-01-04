@@ -1,5 +1,7 @@
 ## OCHO Utilities
 
+[![Build status](https://ci.appveyor.com/api/projects/status/063v38jv6lwoxq5e?svg=true)](https://ci.appveyor.com/project/therealjeffg/ocho-utils)
+
 A utility module for translating csv data defining midi parameters from usercamp's data set
 into JSON files for use in OCHO.
 
@@ -15,3 +17,5 @@ Basic functionality:
 1. checkout or update git repos for open midi rtc and usercamp/midi
 2. convert relevant csv format sources from midicamp to OMR json format
 3. create stubs for any new hardware we're seeing
+
+See license.txt for CCC details.
