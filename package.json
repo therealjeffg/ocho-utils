@@ -10,7 +10,7 @@
   "author": "Jeff Griffiths ( jeff@techno.email )",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^26.2.2"
+    "jest": "27.0.4"
   },
   "dependencies": {
     "csv": "^5.1.3",
